@@ -1,0 +1,21 @@
+table {
+  width: 90%;
+  padding: 10px;
+  margin: auto;
+  text-align: center;
+  background-color: white;
+  border: #00356B;
+  border-width: 10;
+  color: #00356B;
+}
+
+button {
+  color: #00356B;
+  background-color: lightblue;
+  border-radius: 5px;
+  border: white;
+  border-width: 3px;
+  padding: 5px;
+}
+
+  
