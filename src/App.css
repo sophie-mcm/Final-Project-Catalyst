@@ -29,19 +29,13 @@
 }
 
 .column1 {
-  float: left;
-  width: 50%;
+  float: center;
   background-color: #00356B;
   color: white
 }
 
-.column2 {
-  float: left;
-  width: 50%;
-}
-
 img {
   width: 20%;
-  float: left;
+  float: center;
   margin-left: 24px;
 }

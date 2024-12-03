@@ -1,18 +1,26 @@
 import './App.css';
+import './styles.css';
 import Allocation from './Allocation';
+import BudgetTracker from './BudgetTracker'; // Import your component
 
 function App() {
   return (
     <>
       <h1>Handsome Dan's Budget Tracker</h1>
 
-      <div class="row">
-          <div class="column1">
-            <Allocation/>
-            <img src="/images/handsomedan.png" alt="Handsome Dan"/>
+      <div className="container">
+        {/* Friend's Part */}
+        <div className="row">
+          <div className="column1">
+            <Allocation />
+            <img src="/images/handsomedan.png" alt="Handsome Dan" />
           </div>
-          <div class="column2"></div>
-          <p>Expense Tracker can go here?</p>
+        </div>
+
+        {/* Your Part */}
+        <div className="row">
+          <BudgetTracker /> {/* Render your Budget Tracker here */}
+        </div>
       </div>
     </>
   );
