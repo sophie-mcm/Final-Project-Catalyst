@@ -34,17 +34,17 @@ body {
   /* Form */
   form {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
     gap: 15px;
     margin-bottom: 20px;
   }
   
   form input,
   form select {
-    padding: 12px 15px;
+    padding: 10px 12px;
     border: 1px solid #dfe6e9;
     border-radius: 6px;
-    font-size: 16px;
+    font-size: 14px;
     outline: none;
     background: #f5f6fa;
     transition: border-color 0.3s ease;
@@ -180,3 +180,10 @@ body {
       gap: 10px;
     }
   }  
+
+  .centerButton {
+    grid-column: span 6;
+    padding: 12px 15px;
+    margin-right: 12px;
+    margin-left: 4px;
+  }
