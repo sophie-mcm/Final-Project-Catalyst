@@ -9,17 +9,14 @@ function App() {
       <h1>Handsome Dan's Budget Tracker</h1>
 
       <div className="container">
-        {/* Friend's Part */}
         <div className="row">
           <div className="column1">
             <Allocation />
             <img src="/images/handsomedan.png" alt="Handsome Dan" />
           </div>
         </div>
-
-        {/* Your Part */}
         <div className="row">
-          <BudgetTracker /> {/* Render your Budget Tracker here */}
+          <BudgetTracker />
         </div>
       </div>
     </>
