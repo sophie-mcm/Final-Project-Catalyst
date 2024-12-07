@@ -12,9 +12,10 @@ function BudgetTracker() {
     const date = form.date.value;
     const amount = parseFloat(form.amount.value);
     const type = form.type.value;
+    const category = form.category.value;
 
     if (name && date && !isNaN(amount)) {
-      setTransactions((prev) => [...prev, { name, date, amount, type }]);
+      setTransactions((prev) => [...prev, { name, date, amount, type, category }]);
       form.reset();
     }
   };
@@ -48,8 +49,32 @@ function BudgetTracker() {
     return totals;
   };
 
+  const calculateTotalsCat = (txns) => {
+    const currentDate = new Date();
+    const weekAgo = new Date(currentDate - 7 * 24 * 60 * 60 * 1000);
+    const monthAgo = new Date(currentDate.setMonth(currentDate.getMonth() - 1));
+
+    const totals = { weekly: {}, monthly: {} };
+
+    txns.forEach(({ date, amount, type, category }) => {
+      const txnDate = new Date(date);
+
+      if (txnDate >= weekAgo) {
+        if (!totals.weekly[category]) totals.weekly[category] = { income: 0, expense: 0 };
+        totals.weekly[category][type] += amount;
+      }
+      
+      if (txnDate >= monthAgo) {
+        if (!totals.monthly[category]) totals.monthly[category] = { income: 0, expense: 0 };
+        totals.monthly[category][type] += amount; }
+    });
+
+    return totals;
+  };
+
   const filteredTransactions = filterTransactions(transactions);
   const totals = calculateTotals(transactions);
+  const categoryTotals = calculateTotalsCat(transactions);
 
   return (
     <div className="budget-tracker">
@@ -59,11 +84,12 @@ function BudgetTracker() {
         <input type="text" name="name" placeholder="Transaction Name" required />
         <input type="date" name="date" required />
         <input type="number" name="amount" placeholder="Amount" required />
+        <input type="text" name="category" placeholder="Category Name" required />
         <select name="type" required>
           <option value="income">Income</option>
           <option value="expense">Expense</option>
         </select>
-        <button type="submit">Add Transaction</button>
+        <button type="submit" className="centerButton">Add Transaction</button>
       </form>
 
       <div className="filter-container">
@@ -88,6 +114,7 @@ function BudgetTracker() {
             <th>Date</th>
             <th>Amount</th>
             <th>Type</th>
+            <th>Category</th>
           </tr>
         </thead>
         <tbody>
@@ -97,6 +124,7 @@ function BudgetTracker() {
               <td>{txn.date}</td>
               <td>${txn.amount.toFixed(2)}</td>
               <td>{txn.type}</td>
+              <td>{txn.category}</td>
             </tr>
           ))}
         </tbody>
@@ -112,6 +140,25 @@ function BudgetTracker() {
           <h3>Monthly Totals</h3>
           <p>Income: ${totals.monthly.income.toFixed(2)}</p>
           <p>Expense: ${totals.monthly.expense.toFixed(2)}</p>
+        </div>
+      </div>
+
+      <div className="totals">
+        <div>
+          <h3>Weekly Totals per Category</h3>
+            {Object.entries(categoryTotals.weekly).map(([category, totals]) => (
+              <div key={category}>
+                <p>{category}: ${(totals.income - totals.expense).toFixed(2)}</p>
+              </div>
+            ))}
+          </div>
+        <div>
+          <h3>Monthly Totals per Category</h3>
+            {Object.entries(categoryTotals.monthly).map(([category, totals]) => (
+              <div key={category}>
+                <p>{category}: ${(totals.income - totals.expense).toFixed(2)}</p>
+              </div>
+            ))}
         </div>
       </div>
     </div>
