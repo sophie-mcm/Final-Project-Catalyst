@@ -10,12 +10,29 @@ table {
 }
 
 button {
-  color: #00356B;
-  background-color: lightblue;
-  border-radius: 5px;
-  border: white;
-  border-width: 3px;
-  padding: 5px;
-}
-
+    grid-column: span 2;
+    padding: 10px 12px;
+    background: #ffffff;
+    color: #00356B;
+    border: none;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    margin-left: 15px;
+  }
   
+  button:hover {
+    background: #2980b9;
+  }
+
+  input {
+    padding: 10px 12px;
+    border: 1px solid #dfe6e9;
+    border-radius: 6px;
+    font-size: 14px;
+    outline: none;
+    background: #f5f6fa;
+    transition: border-color 0.3s ease;
+  }
